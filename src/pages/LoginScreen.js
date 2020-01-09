@@ -20,22 +20,10 @@ class LoginScreen extends Component{
         this.state = {
           loading: false,
           pacientes: [],
-          url: 'https://pokeapi.co/api/v2/pokemon/'
+          url: 'http://192.168.100.9:8000/api/v1.0/patients/'
         }
-        /*super(props)
-            this.timestamp =1;
-            this.public_key="36700780168bdcf1bb2901333a59575a";
-            this.private_key="55323dc109f7cc180247ef518c2155dd51aca969";
-            this.state={
-                loaded: false,
-                marvel: [],
-                url: 'http://gateway.marvel.com:80/v1/public/characters'
-            }*/
-               /* dataSource: new FlatList.Da({
-                    rowHasChanged: (row1,row2)=>row1!=row2
-                }),
-                loaded: false*/
-            
+
+        const x = 'http://192.168.100.9:8000/api/v1.0/';
     }
 
 
@@ -49,9 +37,11 @@ class LoginScreen extends Component{
         this.setState({loading:true})
         fetch(this.state.url)
         .then(res=>res.json())
+        
         .then(res=>{ 
+            console.log(res)
             this.setState({
-            pacientes: res.results,
+            pacientes: res,
             url: res.next,
             loading: false,    
             })
@@ -60,68 +50,10 @@ class LoginScreen extends Component{
 
     
     
-    //componentDidMount(){
-      //  this.fetchData();
-    //}
-    
-        
+
     
 
-
-       /* this.setState({loading:true})
-        fetch(this.state.url)
-        .then(res=>res.json())
-        .then(res=>{
-            this.setState({
-            pokemon: res.results,
-            url: res.next,
-            loading: false
-    
-            })
-        }
-    
-        )
-        }*/
-       /* fetchData(){
-            this.setState({loaded:true})
-            var hash = Crypto.MD5(this.timestamp+this.private_key+this.public_key);
-            fetch(this.REQUEST_URL+'?t=s'+this.timestamp+'&apikey='+this.public_key+'&ash='+hash)
-            .then((response)=>response.json())
-            .then((response)=>{
-                console.log(response)
-                this.setState({
-                    marvel: response.results,
-                    url: response.next,
-                    loaded: true
-                })
-            })
-
-        }*/
-       
-
-    renderLoadingView(){
-        return(
-            <View>
-                <Text>Cargando</Text>
-            </View>
-        )
-    }
-
-    renderComic(comic){
-        return(
-            <TouchableHighlight >
-                <Image source={{uri: 'https://img2.freepng.es/20180508/toe/kisspng-user-profile-computer-icons-clip-art-5af1ac8cee74c6.8111281615257877889767.jpg'}}style={styles.backgroundImage}>
-                    <View style={styles.rightContainer}>
-                        <Text style={styles.title}>{comic.url}</Text>
-                     
-                    </View>
-                   
-
-
-                </Image>
-            </TouchableHighlight>
-        )
-    }
+   
 
     render(){
 
@@ -131,41 +63,25 @@ class LoginScreen extends Component{
             <FlatList
 
                 
-                data={this.state.pokemon}
+                data={this.state.pacientes}
                 renderItem={({item})=>
-
                     <ScrollView contentContainerStyle={styles.contentContainer}>
                    
-                    <IconButton icono='user'/>
+                        <IconButton icono='user'/>
                 
                         
                         
-                            <View style={styles.container}>
-                                <Text style={styles.title} >Paciente: {item.name}</Text>
-                            
-                            </View>
-        
-        
-                        
+                        <View style={styles.container}>
+                            <Text style={styles.title} >{`${item.names} está ${item.state}`} </Text>
+                        </View>
                     </ScrollView>
-                  //  ({item})=>
-                   // <Text>Nombre: {item.name} </Text>
+              
                 }
-                   // data={this.state.pokemon}
-                    //renderItem={({item}) =>this.renderComic.bind(item)}
+           
                       
-                  
-                    
+    
                 
                 />
-
-         /*   <FlatList
-                dataSource= {this.props.puppies}
-                renderItem={this.renderComic.bind(this)}
-                style = {styles.FlatList}
-
-            />*/
-
 
         )
     }
@@ -198,8 +114,9 @@ const IconButton = (props) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      marginLeft:10,
       
-      alignItems: 'center',
+      alignItems: 'baseline',
       justifyContent: 'center',
     },
     contentContainer:{

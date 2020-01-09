@@ -53,7 +53,7 @@ class App extends React.Component {
 }
 
 const NavStack = createStackNavigator({
-  Pokemon: Pokemon,
+  
   Login: LoginScreen
 
   

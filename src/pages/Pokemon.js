@@ -10,7 +10,7 @@ class Pokemon extends Component{
                 <View style={styles.container}>
                     <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLnRn3txhussoAud9MWhNnsQVMDZVhezrMRXM4I5fvX01AsBL0&s'}}/>
                     <Text>hola</Text>
-            Z       </View>
+                  </View>
                 <View>
                         <TextInput placeholder={'user'}/>
                     </View>
